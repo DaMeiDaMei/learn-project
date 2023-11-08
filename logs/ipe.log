@@ -1,0 +1,37 @@
+[ERROR] [2022-10-20 14:18:06,780] [] [:] [] [] [] [] [] [org.springframework.boot.SpringApplication] [Application run failed]
+java.lang.IllegalStateException: java.lang.IllegalStateException: Logback configuration error detected: 
+ERROR in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Could not create component [encoder] of type [net.logstash.logback.encoder.LogstashEncoder] java.lang.ClassNotFoundException: net.logstash.logback.encoder.LogstashEncoder
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[logstash] - No encoder set for the appender named "logstash".
+ERROR in ch.qos.logback.core.joran.action.AppenderAction - Could not create an Appender of type [com.github.danielwegener.logback.kafka.KafkaAppender]. ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type com.github.danielwegener.logback.kafka.KafkaAppender
+ERROR in ch.qos.logback.core.joran.spi.Interpreter@47:97 - ActionException in Action for tag [appender] ch.qos.logback.core.joran.spi.ActionException: ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type com.github.danielwegener.logback.kafka.KafkaAppender
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:328)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initialize(LoggingApplicationListener.java:282)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEnvironmentPreparedEvent(LoggingApplicationListener.java:240)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.onApplicationEvent(LoggingApplicationListener.java:216)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:131)
+	at org.springframework.boot.context.event.EventPublishingRunListener.environmentPrepared(EventPublishingRunListener.java:82)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$environmentPrepared$2(SpringApplicationRunListeners.java:63)
+	at java.util.ArrayList.forEach(ArrayList.java:1249)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:117)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:111)
+	at org.springframework.boot.SpringApplicationRunListeners.environmentPrepared(SpringApplicationRunListeners.java:62)
+	at org.springframework.boot.SpringApplication.prepareEnvironment(SpringApplication.java:374)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:332)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1343)
+	at org.chinalife.supervision.eureka.server.ServerMain.main(ServerMain.java:13)
+Caused by: java.lang.IllegalStateException: Logback configuration error detected: 
+ERROR in ch.qos.logback.core.joran.action.NestedComplexPropertyIA - Could not create component [encoder] of type [net.logstash.logback.encoder.LogstashEncoder] java.lang.ClassNotFoundException: net.logstash.logback.encoder.LogstashEncoder
+ERROR in ch.qos.logback.core.rolling.RollingFileAppender[logstash] - No encoder set for the appender named "logstash".
+ERROR in ch.qos.logback.core.joran.action.AppenderAction - Could not create an Appender of type [com.github.danielwegener.logback.kafka.KafkaAppender]. ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type com.github.danielwegener.logback.kafka.KafkaAppender
+ERROR in ch.qos.logback.core.joran.spi.Interpreter@47:97 - ActionException in Action for tag [appender] ch.qos.logback.core.joran.spi.ActionException: ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type com.github.danielwegener.logback.kafka.KafkaAppender
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.loadConfiguration(LogbackLoggingSystem.java:179)
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.reinitialize(LogbackLoggingSystem.java:232)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initializeWithConventions(AbstractLoggingSystem.java:73)
+	at org.springframework.boot.logging.AbstractLoggingSystem.initialize(AbstractLoggingSystem.java:60)
+	at org.springframework.boot.logging.logback.LogbackLoggingSystem.initialize(LogbackLoggingSystem.java:132)
+	at org.springframework.boot.context.logging.LoggingApplicationListener.initializeSystem(LoggingApplicationListener.java:313)
+	... 18 common frames omitted

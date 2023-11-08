@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.chinalife</groupId>
+  <artifactId>learn-spring-cloud</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>learn-spring-cloud</name>
+  <packaging>pom</packaging>
+  <description>监管报送项目</description>
+
+  <modules>
+    <module>supervision-common</module>
+    <module>supervision-eureka-server</module>
+    <module>supervision-eureka-client</module>
+    <module>supervision-eureka-registry</module>
+    <module>spring-boot-jpa</module>
+    <module>unit-mock</module>
+    <module>spring-boot-jpa-dm</module>
+      <module>learn-http-clients</module>
+  </modules>
+  <properties>
+    <java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <unic.core.version>2.0.0-SNAPSHOT</unic.core.version>
+    <spring-boot.version>2.5.3</spring-boot.version>
+    <spring-boot-test.version>2.5.3</spring-boot-test.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <dmdialect.version>5.3</dmdialect.version>
+    <dm.version>1.0</dm.version>
+  </properties>
+
+  <!-- Repositories -->
+  <repositories>
+    <!-- 阿里云仓库 -->
+    <repository>
+      <id>central</id>
+      <name>Maven Repository Switchboard</name>
+      <layout>default</layout>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <!-- 公司私服仓库 -->
+    <repository>
+      <id>remote-nexus</id>
+      <url>http://9.1.12.30:8081/repository/public/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>interval:5</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>chinalife-releases</id>
+      <url>http://9.1.12.30:8081/repository/chinalife-releases/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>interval:5</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>chinalife-snapshot</id>
+      <url>http://9.1.12.30:8081/repository/chinalife-snapshot/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>interval:5</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>thirdparty</id>
+      <url>http://9.1.12.30:8081/repository/thirdparty/</url>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>interval:5</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+    <!-- 使用 DM 的镜像仓库来下载驱动包-->
+    <repository>
+      <id>dc</id>
+      <name>dc Repository</name>
+      <url>http://119.96.100.222:8181/repository/maven-releases/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>remote-nexus</id>
+      <url>http://9.1.12.30:8081/repository/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <!-- 依赖项管理 -->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.github.openfeign</groupId>
+        <artifactId>feign-core</artifactId>
+        <version>11.1</version>
+        <scope>compile</scope>
+      </dependency>
+      <!--            spring boot \cloud映射关系 https://spring.io/projects/spring-cloud-->
+      <!-- springcloud的依赖-->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>2020.0.4</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- springboot的依赖-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- springboot启动器-->
+      <dependency>
+        <groupId>org.mybatis.spring.boot</groupId>
+        <artifactId>mybatis-spring-boot-starter</artifactId>
+        <version>{spring-boot.version}</version>
+      </dependency>
+
+      <!-- log4j-->
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${log4j.vsrsion}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>1.2.3</version>
+      </dependency>
+
+      <!--对接日志平台使用-->
+      <dependency>
+        <groupId>com.github.danielwegener</groupId>
+        <artifactId>logback-kafka-appender</artifactId>
+        <version>0.2.0-RC2</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>com.chinalife</groupId>
+        <artifactId>logplatform-ipconfig</artifactId>
+        <version>1.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-collections</groupId>
+        <artifactId>commons-collections</artifactId>
+        <version>3.2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.12.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.dameng</groupId>
+        <artifactId>DmJdbcDriver18</artifactId>
+        <version>${dm.version}</version>
+      </dependency>
+
+      <!-- 单元测试 -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <version>2.5.3</version>
+        <scope>test</scope>
+      </dependency>
+
+<!--   lombok   -->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.20</version>
+        <scope>compile</scope>
+      </dependency>
+
+
+
+
+    </dependencies>
+  </dependencyManagement>
+
+  <!--  for deploy  -->
+  <distributionManagement>
+    <repository>
+      <id>chinalife-releases</id>
+      <name>Chinalife Releases Repository</name>
+      <url>http://9.1.12.30:8081/repository/chinalife-releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>chinalife-snapshot</id>
+      <name>Chinalife Snapshots Repository</name>
+      <url>http://9.1.12.30:8081/repository/chinalife-snapshot/</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>

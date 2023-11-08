@@ -1,0 +1,32 @@
+server:
+  port: 8120
+  address: localhost
+spring:
+  datasource:
+    # DM 数据库配置
+    driver-class-name: dm.jdbc.driver.DmDriver
+    url: jdbc:dm://localhost:5236?compatibleMode=oracle
+#    username: SUPERVISION
+#    password: SUPERVISION!29yh
+    read-only: false
+    connection-timeout: 30000
+    idle-timeout: 600000
+    max-lifetime: 1800000
+    maximum-pool-size: 6
+    username: SYSDBA
+    password: SYSDBA
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        # logical name -> physical name
+        # SpringPhysicalNamingStrategy【默认】 表名，字段为小写，当有大写字母时会添加下划线分隔符号
+        # PhysicalNamingStrategyStandardImpl 直接映射，不会做过多的处理
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        # object name -> logical name 逻辑名可以显示指定（@Column @Table）, 若未指定则交由implicit-strategy
+        # ImplicitNamingStrategyJpaCompliantImpl【默认】 符合JPA12.0标准的命名策略
+        # implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.DmDialect

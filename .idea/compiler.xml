@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="supervision-eureka-registry" />
+        <module name="spring-boot-jpa" />
+        <module name="spring-boot-jpa-dm" />
+        <module name="supervision-eureka-server" />
+        <module name="unit-mock" />
+        <module name="supervision-eureka-client" />
+        <module name="learn-http-clients" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="junit-mock" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
